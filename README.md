@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Rush 01 – Piscine Java
 ### Java FX & Sockets
 *Takeaways: Today you will implement an actual client/server game with a full-scale interface*
@@ -103,3 +104,7 @@ Thus, the game should enable two users to "drive" their tank and decrease the en
 - README.md file shall be prepared with a set of instructions for application assembly and startup.
 
 Files you can use to implement the game: [Materials](/materials)
+=======
+# ft_WorldOfTanks
+21 java piscine project
+>>>>>>> df779be... Initial commit
