@@ -36,28 +36,28 @@ public class Main extends Application {
         signup.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-//                String host = ip.getCharacters().toString().substring(0, ip.getCharacters().toString().indexOf(':'));
-//                String portStr = ip.getCharacters().toString().substring(ip.getCharacters().toString().indexOf(':') + 1);
-//                int port = Integer.parseInt(portStr);
-//                try {
-//                    clientSocket = new Socket(host, port);
-//                    out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-//                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-//                    String response = in.readLine();
-//                    JSONObject jsonObject = new JSONObject() {{
-//                            put("type", "signup");
-//                            put("username", username.getCharacters());
-//                            put("password", password.getCharacters());
-//                        }};
-//                    out.write(jsonObject.toString() + "\n");
-//                    out.flush();
-//                    response = in.readLine();
-//                    if (response.equals("game")) {
+                String host = ip.getCharacters().toString().substring(0, ip.getCharacters().toString().indexOf(':'));
+                String portStr = ip.getCharacters().toString().substring(ip.getCharacters().toString().indexOf(':') + 1);
+                int port = Integer.parseInt(portStr);
+                try {
+                    clientSocket = new Socket(host, port);
+                    out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                    String response = in.readLine();
+                    JSONObject jsonObject = new JSONObject() {{
+                            put("type", "signup");
+                            put("username", username.getCharacters());
+                            put("password", password.getCharacters());
+                        }};
+                    out.write(jsonObject.toString() + "\n");
+                    out.flush();
+                    response = in.readLine();
+                    if (response.equals("game")) {
                         stageGame();
-//                    }
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
 
             }
         });
@@ -93,7 +93,7 @@ public class Main extends Application {
     public void stageGame() {
         gamePane = new GamePane();
         Scene scene = new Scene(gamePane, 840, 840);
-       // scene.getStylesheets().addAll(this.getClass().getResource("/style.css").toExternalForm());
+        scene.getStylesheets().addAll(this.getClass().getResource("/style.css").toExternalForm());
         scene.setOnKeyPressed(event -> gamePane.getKeys().put(event.getCode(), true));
         scene.setOnKeyReleased(event -> gamePane.getKeys().put(event.getCode(), false));
         AnimationTimer timer = new AnimationTimer() {

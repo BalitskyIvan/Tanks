@@ -13,11 +13,14 @@ public class Life extends Pane {
         getChildren().addAll(imageView);
         this.setTranslateX(x);
         this.setTranslateY(y);
-
-//        imageView.setFitWidth(150);
+        this.imageView.setFitWidth(200);
     }
 
-    public void reduce() {
-//        imageView.setFitWidth(imageView.getFitWidth() - 10);
+    public void reduce(double hp) {
+        imageView.setFitWidth(2 * hp);
     }
+
+//    public double getWigth() {
+//        return imageView.getFitWidth();
+//    }
 }

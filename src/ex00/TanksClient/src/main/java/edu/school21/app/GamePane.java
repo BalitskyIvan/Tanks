@@ -21,6 +21,8 @@ public class GamePane extends Pane {
     private Border playerLifeBorder;
     private Life playerLife;
 
+    private Fail fail;
+
     public GamePane() {
         this.setId("pane");
         keys = new HashMap<>();
@@ -49,9 +51,13 @@ public class GamePane extends Pane {
                 190, 30, false, false)), 10, 805);
         playerLifeBorder = new Border(new ImageView(new Image(getClass().getResourceAsStream("/png/border.png"),
                 200, 30, false, false)), 5, 805);
+
         this.getChildren().add(player);
         this.getChildren().add(playerLife);
         this.getChildren().add(playerLifeBorder);
+
+        fail = new Fail(-512, -512);
+        this.getChildren().add(fail);
     }
 
     public void updateKeys()
@@ -147,7 +153,15 @@ public class GamePane extends Pane {
             if (!isUsed && enemyBullet1.isUsed())
                 enemyBullet1.setUsed(false);
         }
+        int myHp = 0;
+        int enemyHp = 50;
+        if (enemyHp == 0 || myHp == 0) {
+            fail.move(180, 120);
+        }
+        enemyLife.reduce(enemyHp);
+        playerLife.reduce(myHp);
     }
+
 
     public boolean isPressed(KeyCode keyCode) {
         return keys.getOrDefault(keyCode, false);

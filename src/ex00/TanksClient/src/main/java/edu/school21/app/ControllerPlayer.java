@@ -27,6 +27,9 @@ public class ControllerPlayer extends Thread {
         while (true) {
             try {
                 String str = in.readLine();
+                if (str.equals("stop")) {
+
+                }
                 JSONObject jsonObject = new JSONObject(str);
                 int tick = jsonObject.getInt("tick");
                 String response = tick + ":";

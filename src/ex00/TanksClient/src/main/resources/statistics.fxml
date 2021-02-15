@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: #8FBC8F#8FBC8F#8FBC8F#8FBC8F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.school21.app.Main">
+   <children>
+      <VBox layoutX="208.0" layoutY="229.0" prefHeight="150.0" prefWidth="92.0">
+         <children>
+            <TextField promptText="shots" style="-fx-background-color: #F0FFF0#F0FFF0;" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField promptText="hits" style="-fx-background-color: #F0FFF0#F0FFF0;">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+            <TextField promptText="misses" style="-fx-background-color: #F0FFF0#F0FFF0;">
+               <VBox.margin>
+                  <Insets bottom="10.0" top="10.0" />
+               </VBox.margin>
+            </TextField>
+         </children>
+      </VBox>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="134.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@png/tank.png" />
+         </image>
+      </ImageView>
+      <VBox layoutX="100.0" layoutY="229.0" prefHeight="150.0" prefWidth="85.0">
+         <children>
+            <Text fill="#1f6b08" strokeType="OUTSIDE" strokeWidth="0.0" text="SHOTS" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <Text fill="#1f6b08" strokeType="OUTSIDE" strokeWidth="0.0" text="HITS" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+            <Text fill="#1f6b08" strokeType="OUTSIDE" strokeWidth="0.0" text="MISSES" textAlignment="CENTER" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </Text>
+         </children>
+      </VBox>
+      <Text fill="#c94747" layoutX="100.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GAME STATISTIC" textAlignment="CENTER">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
