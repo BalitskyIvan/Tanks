@@ -2,6 +2,7 @@ package edu.school21.sockets.server;
 
 import edu.school21.sockets.containers.Room;
 import edu.school21.sockets.services.UsersService;
+import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
@@ -11,7 +12,6 @@ public class Authorize extends Thread {
     private UsersService usersService;
     private BufferedReader in;
     private BufferedWriter out;
-    private String username;
     private boolean isAuthorize = false;
     private boolean isFirst = false;
 
@@ -30,28 +30,38 @@ public class Authorize extends Thread {
         try {
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+            System.out.println("welcome");
+            out.write("welcome\n");
+            out.flush();
+            JSONObject jsonObject = null;
             while (!isAuthorize) {
-                out.write("What do you want, signUp or signIn?\n");
-                out.flush();
-                String operationType = in.readLine();
-                while (!operationType.equals("signUp") && !operationType.equals("signIn")) {
-                    out.write("Wrong operation, try again: \n");
-                    out.flush();
-                    operationType = in.readLine();
+                String response = in.readLine();
+                jsonObject = new JSONObject(response);
+                if (jsonObject.get("type").toString().equals("signup"))
+                {
+                    isAuthorize = usersService.signIn(jsonObject.get("username").toString(), jsonObject.getString("password"));
+                    if (!isAuthorize)
+                    {
+                        out.write("error: 0\n");
+                        out.flush();
+                    }
                 }
-                if (operationType.equals("signUp")) {
-                    isAuthorize = register();
-                }
-                if (operationType.equals("signIn")) {
-                    isAuthorize = logIn();
+                if (jsonObject.get("type").toString().equals("signin"))
+                {
+                    isAuthorize = usersService.signIn(jsonObject.get("username").toString(), jsonObject.getString("password"));
+                    if (!isAuthorize)
+                    {
+                        out.write("error: 1\n");
+                        out.flush();
+                    }
                 }
             }
-            usersService.fillRoom(username, isFirst);
+            usersService.fillRoom(jsonObject.get("username").toString(), isFirst);
             if (isFirst)
                 Room.setClient1(clientSocket);
             else
                 Room.setClient2(clientSocket);
-            System.out.println(isFirst + "player connnected");
+            System.out.println(jsonObject.get("username").toString() + " connnected");
         } catch (IOException e) {
             if (isFirst)
                 Room.setPlayer1(0L);
@@ -59,41 +69,5 @@ public class Authorize extends Thread {
                 Room.setPlayer2(0L);
             e.printStackTrace();
         }
-    }
-
-    private boolean register() throws IOException {
-        String pass = readFromClient();
-        if (usersService.signUp(username, pass)) {
-            out.write("Successful!\n");
-            out.flush();
-            return true;
-        } else {
-            out.write("User already exist!\n");
-            out.flush();
-            return false;
-        }
-    }
-
-    private boolean logIn() throws IOException {
-        String pass = readFromClient();
-        if (usersService.signIn(username, pass)) {
-            out.write("Successful!\n");
-            out.flush();
-            return true;
-        } else {
-            out.write("Login or password are incorrect!\n");
-            out.flush();
-            return false;
-        }
-    }
-
-    private String readFromClient() throws IOException {
-        out.write("Enter username:\n");
-        out.flush();
-        username = in.readLine();
-        out.write("Enter password:\n");
-        out.flush();
-        String password = in.readLine();
-        return password;
     }
 }

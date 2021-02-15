@@ -1,5 +1,8 @@
 package edu.school21.sockets.models;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import java.awt.*;
 
 public class Tank {
@@ -7,7 +10,7 @@ public class Tank {
     private Rectangle rectangle;
     private static final int HEIGHT = 105;
     private static final int WIDTH = 81;
-    private static final float SPEED = 0.1f;
+    private static final float SPEED = 2f;
     private float posX;
     private float posY;
 
@@ -24,7 +27,7 @@ public class Tank {
 
     public void moveRight()
     {
-        posX -= SPEED;
+        posX += SPEED;
         rectangle.setRect((int) posX, (int) posY, WIDTH, HEIGHT);
     }
 
@@ -49,5 +52,18 @@ public class Tank {
             return true;
         }
         return false;
+    }
+
+    public Rectangle getRectangle() {
+        return rectangle;
+    }
+
+    public JSONObject toJson(int reverse)
+    {
+        JSONObject valuesObject = new JSONObject();
+        valuesObject.put("hp", getHp());
+        valuesObject.put("x", rectangle.x);
+        valuesObject.put("y", reverse - rectangle.y);
+        return valuesObject;
     }
 }

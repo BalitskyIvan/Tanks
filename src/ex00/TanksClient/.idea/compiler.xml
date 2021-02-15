@@ -6,11 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="SocketClient" />
+        <module name="Tanks" />
+        <module name="rush01" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="SocketClient" target="8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

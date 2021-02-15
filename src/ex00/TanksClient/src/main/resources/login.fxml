@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+
+<VBox fx:controller="edu.school21.app.Main" alignment="CENTER" prefHeight="438.0" prefWidth="520.0" style="-fx-background-color: #8FBC8F#8FBC8F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@png/tank.png" />
+         </image>
+      </ImageView>
+      <TextField fx:id="ip" promptText="ip-adress">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="username" promptText="username" VBox.vgrow="ALWAYS">
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="10.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </TextField>
+      <TextField fx:id="password" promptText="password" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <VBox.margin>
+            <Insets left="50.0" right="50.0" top="10.0" />
+         </VBox.margin>
+      </TextField>
+      <HBox>
+         <children>
+            <Button  fx:id="signup" mnemonicParsing="false" text="SignUp" textFill="#970a0a" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="80.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="signin" mnemonicParsing="false" text="SignIn" textFill="#1b720c" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets left="250.0" right="50.0" top="10.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</VBox>

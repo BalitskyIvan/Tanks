@@ -1,0 +1,6 @@
+#pane{
+    -fx-background-image: url("/png/field.png");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 840 840;
+    -fx-background-position: center center;
+}

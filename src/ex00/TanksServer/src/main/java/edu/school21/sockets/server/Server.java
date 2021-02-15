@@ -56,7 +56,6 @@ public class Server {
                 }
                 if (!Room.isRoomEmpty() && !Room.isIsGameStarted())
                 {
-                    System.out.println("here");
                     Room.setIsGameStarted(true);
                     game = new Game(usersService, requestParser, responseBuilder);
                     game.start();
