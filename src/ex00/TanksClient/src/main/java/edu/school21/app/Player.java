@@ -20,4 +20,6 @@ public class Player extends Pane {
     public void moveX(int x) {
         this.setTranslateX(x);
     }
+
+
 }

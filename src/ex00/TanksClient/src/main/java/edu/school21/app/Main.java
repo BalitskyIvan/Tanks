@@ -36,28 +36,28 @@ public class Main extends Application {
         signup.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                String host = ip.getCharacters().toString().substring(0, ip.getCharacters().toString().indexOf(':'));
-                String portStr = ip.getCharacters().toString().substring(ip.getCharacters().toString().indexOf(':') + 1);
-                int port = Integer.parseInt(portStr);
-                try {
-                    clientSocket = new Socket(host, port);
-                    out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
-                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                    String response = in.readLine();
-                    JSONObject jsonObject = new JSONObject() {{
-                            put("type", "signup");
-                            put("username", username.getCharacters());
-                            put("password", password.getCharacters());
-                        }};
-                    out.write(jsonObject.toString() + "\n");
-                    out.flush();
-                    response = in.readLine();
-                    if (response.equals("game")) {
+//                String host = ip.getCharacters().toString().substring(0, ip.getCharacters().toString().indexOf(':'));
+//                String portStr = ip.getCharacters().toString().substring(ip.getCharacters().toString().indexOf(':') + 1);
+//                int port = Integer.parseInt(portStr);
+//                try {
+//                    clientSocket = new Socket(host, port);
+//                    out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+//                    in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+//                    String response = in.readLine();
+//                    JSONObject jsonObject = new JSONObject() {{
+//                            put("type", "signup");
+//                            put("username", username.getCharacters());
+//                            put("password", password.getCharacters());
+//                        }};
+//                    out.write(jsonObject.toString() + "\n");
+//                    out.flush();
+//                    response = in.readLine();
+//                    if (response.equals("game")) {
                         stageGame();
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+//                    }
+//                } catch (IOException e) {
+//                    e.printStackTrace();
+//                }
 
             }
         });
