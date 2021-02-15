@@ -14,6 +14,7 @@ public class ControllerPlayer extends Thread {
     private BufferedWriter out;
     private BufferedReader in;
     private GamePane gamePane;
+    private int lastTickToShoot = 0;
 
     public ControllerPlayer(BufferedWriter out, BufferedReader in, GamePane gamePane) {
         this.out = out;
@@ -27,7 +28,8 @@ public class ControllerPlayer extends Thread {
             try {
                 String str = in.readLine();
                 JSONObject jsonObject = new JSONObject(str);
-                String response = jsonObject.getInt("tick") + ":";
+                int tick = jsonObject.getInt("tick");
+                String response = tick + ":";
                 int movement = gamePane.getMovement();
                 switch (movement)
                 {
@@ -37,9 +39,15 @@ public class ControllerPlayer extends Thread {
                     case 2:
                         response += "RIGHT";
                         break;
-                    case 3:
-                        response += "SHOOT";
+                    case 3: {
+                        if (tick - lastTickToShoot > 50 || lastTickToShoot == 0) {
+                            response += "SHOOT";
+                            lastTickToShoot = tick;
+                        }
+                        else
+                            response += "NONE";
                         break;
+                    }
                     default:
                         response += "NONE";
                 }
@@ -50,26 +58,25 @@ public class ControllerPlayer extends Thread {
                 int enBulletSize = jsonObject.getInt("enBulletSize");
                 int myBulletSize = jsonObject.getInt("myBulletSize");
 
-                JSONObject enemyBulletsObject = new JSONObject(jsonObject.getJSONObject("enBullets"));
+                JSONObject enemyBulletsObject = new JSONObject(jsonObject.get("enBullets").toString());
                 Integer [][] arrayBulletEnemy = new Integer[3][enBulletSize];
                 for (int i = 0; i < enBulletSize; i++) {
-                    JSONObject bulletE = new JSONObject(enemyBulletsObject.get(String.valueOf(i)));
+                    JSONObject bulletE = new JSONObject(enemyBulletsObject.get(String.valueOf(i)).toString());
                     arrayBulletEnemy[0][i] = bulletE.getInt("id");
                     arrayBulletEnemy[1][i] = bulletE.getInt("x");
                     arrayBulletEnemy[2][i] = bulletE.getInt("y");
                 }
 
-                JSONObject myBulletsObject = new JSONObject(jsonObject.getJSONObject("myBullets"));
+                JSONObject myBulletsObject = new JSONObject(jsonObject.get("myBullets").toString());
                 Integer [][] arrayBulletMy = new Integer[3][myBulletSize];
                 for (int i = 0; i < myBulletSize; i++)
                 {
-                    JSONObject bulletM =  new JSONObject(myBulletsObject.get(String.valueOf(i)));
+                    JSONObject bulletM =  new JSONObject(myBulletsObject.get(String.valueOf(i)).toString());
                     arrayBulletMy[0][i] = bulletM.getInt("id");
                     arrayBulletMy[1][i] = bulletM.getInt("x");
                     arrayBulletMy[2][i] = bulletM.getInt("y");
                 }
-
-                gamePane.update(myTank.getInt("x"), enemyTank.getInt("x"), arrayBulletEnemy, arrayBulletMy);
+                gamePane.update(myTank.getInt("x"), enemyTank.getInt("x"), enBulletSize, myBulletSize, arrayBulletEnemy, arrayBulletMy);
             } catch (IOException e) {
                 e.printStackTrace();
             }

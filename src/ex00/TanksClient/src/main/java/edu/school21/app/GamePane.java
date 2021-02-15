@@ -24,7 +24,17 @@ public class GamePane extends Pane {
     public GamePane() {
         this.setId("pane");
         keys = new HashMap<>();
+        listEnemyBullet = new ArrayList<>();
+        listMyBullet = new ArrayList<>();
+        for (int i = 0; i < 50; i++)
+        {
+            MyBullet myBullet = new MyBullet(i, 10, 10);
+            listMyBullet.add(myBullet);
+            this.getChildren().add(listMyBullet.get(i));
+            listEnemyBullet.add(new EnemyBullet(i, 10, 10));
+            this.getChildren().add(listEnemyBullet.get(i));
 
+        }
         enemy = new Enemy(359, 45);
         enemyLife = new Life(new ImageView(new Image(getClass().getResourceAsStream("/png/life.png"),
                 190, 30, false, false)), 635, 10);
@@ -66,11 +76,15 @@ public class GamePane extends Pane {
         return mv;
     }
 
-    public void update(int myX, int enemyX, Integer[][] enemyBullet, Integer[][] myBullet) {
+    public void update(int myX, int enemyX, int enSize, int mySize, Integer[][] enemyBullet, Integer[][] myBullet) {
         player.moveX(myX);
         enemy.moveX(enemyX);
-        for (int i = 0; i < enemyBullet.length; i++) {
+        ArrayList<Integer> usedEnemyBullets = new ArrayList<>();
+        ArrayList<Integer> usedMyBullets = new ArrayList<>();
+
+        for (int i = 0; i < enSize; i++) {
             boolean isExist = false;
+            usedEnemyBullets.add(enemyBullet[0][i]);
             for (EnemyBullet bullet : listEnemyBullet)
             {
                 if (enemyBullet[0][i].equals(bullet.getIdentify())) {
@@ -79,11 +93,20 @@ public class GamePane extends Pane {
                 }
             }
             if (!isExist) {
-                listEnemyBullet.add(new EnemyBullet(enemyBullet[0][i], enemyBullet[1][i], enemyBullet[2][i]));
+                for (EnemyBullet bullet : listEnemyBullet)
+                {
+                    if (!bullet.isUsed()) {
+                        bullet.setUsed(true);
+                        bullet.setId(enemyBullet[0][i]);
+                        bullet.addBullet(enemyBullet[1][i], enemyBullet[2][i]);
+                    }
+                }
             }
         }
-        for (int i = 0; i < myBullet.length; i++) {
+
+        for (int i = 0; i < mySize; i++) {
             boolean isExist = false;
+            usedMyBullets.add(myBullet[0][i]);
             for (MyBullet bullet : listMyBullet)
             {
                 if (myBullet[0][i].equals(bullet.getIdentify())) {
@@ -92,8 +115,37 @@ public class GamePane extends Pane {
                 }
             }
             if (!isExist) {
-                listMyBullet.add(new MyBullet(myBullet[0][i], myBullet[1][i], myBullet[2][i]));
+                for (MyBullet bullet : listMyBullet)
+                {
+                    if (!bullet.isUsed()) {
+                        bullet.setUsed(true);
+                        bullet.setId(myBullet[0][i]);
+                        bullet.addBullet(myBullet[1][i], myBullet[2][i]);
+                    }
+                }
             }
+        }
+        for (EnemyBullet enemyBullet1 : listEnemyBullet)
+        {
+            boolean isUsed = false;
+            for (Integer bullet : usedEnemyBullets)
+            {
+                if (enemyBullet1.getIdentify() == bullet)
+                    isUsed = true;
+            }
+            if (!isUsed && enemyBullet1.isUsed())
+                enemyBullet1.setUsed(false);
+        }
+        for (MyBullet enemyBullet1 : listMyBullet)
+        {
+            boolean isUsed = false;
+            for (Integer bullet : usedMyBullets)
+            {
+                if (enemyBullet1.getIdentify() == bullet)
+                    isUsed = true;
+            }
+            if (!isUsed && enemyBullet1.isUsed())
+                enemyBullet1.setUsed(false);
         }
     }
 

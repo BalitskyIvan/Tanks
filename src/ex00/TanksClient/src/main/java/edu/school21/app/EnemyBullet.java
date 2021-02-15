@@ -7,7 +7,7 @@ import javafx.scene.layout.Pane;
 
 public class EnemyBullet extends Pane {
     private Integer id;
-
+    private boolean isUsed;
     public EnemyBullet(Integer id, double x, double y) {
         ImageView imageView = new ImageView(new Image(getClass().getResourceAsStream("/png/enemyBullet.png")));
         imageView.setViewport(new Rectangle2D(0, 0,6, 12));
@@ -15,6 +15,18 @@ public class EnemyBullet extends Pane {
         this.id = id;
         this.setTranslateX(x);
         this.setTranslateY(y);
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public boolean isUsed() {
+        return isUsed;
+    }
+
+    public void setUsed(boolean used) {
+        isUsed = used;
     }
 
     public Integer getIdentify() {

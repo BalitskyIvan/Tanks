@@ -93,7 +93,7 @@ public class Main extends Application {
     public void stageGame() {
         gamePane = new GamePane();
         Scene scene = new Scene(gamePane, 840, 840);
-        scene.getStylesheets().addAll(this.getClass().getResource("/style.css").toExternalForm());
+       // scene.getStylesheets().addAll(this.getClass().getResource("/style.css").toExternalForm());
         scene.setOnKeyPressed(event -> gamePane.getKeys().put(event.getCode(), true));
         scene.setOnKeyReleased(event -> gamePane.getKeys().put(event.getCode(), false));
         AnimationTimer timer = new AnimationTimer() {
