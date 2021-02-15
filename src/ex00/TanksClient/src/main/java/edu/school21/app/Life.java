@@ -20,7 +20,4 @@ public class Life extends Pane {
         imageView.setFitWidth(2 * hp);
     }
 
-//    public double getWigth() {
-//        return imageView.getFitWidth();
-//    }
 }
