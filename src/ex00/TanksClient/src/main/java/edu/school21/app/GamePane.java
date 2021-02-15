@@ -1,10 +1,13 @@
 package edu.school21.app;
 
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -19,7 +22,8 @@ public class GamePane extends Pane {
     private ArrayList<MyBullet> listMyBullet;
     private Border playerLifeBorder;
     private Life playerLife;
-
+    private javafx.scene.control.TextArea textArea;
+    private FlowPane flowPane;
     private Fail fail;
 
     public GamePane() {
@@ -50,12 +54,20 @@ public class GamePane extends Pane {
                 190, 30, false, false)), 10, 805);
         playerLifeBorder = new Border(new ImageView(new Image(getClass().getResourceAsStream("/png/border.png"),
                 200, 30, false, false)), 5, 805);
+        textArea = new javafx.scene.control.TextArea("");
+        textArea.setEditable(false);
+        textArea.setPrefColumnCount(10);
 
+        flowPane = new FlowPane(Orientation.HORIZONTAL, 10, 10, textArea);
+        flowPane.setAlignment(Pos.CENTER_LEFT);
+        flowPane.setVisible(false);
+        this.getChildren().add(flowPane);
         this.getChildren().add(player);
         this.getChildren().add(playerLife);
         this.getChildren().add(playerLifeBorder);
 
         fail = new Fail(-512, -512);
+
         this.getChildren().add(fail);
     }
 
@@ -157,14 +169,16 @@ public class GamePane extends Pane {
                 enemyBullet1.addBullet(-20, -20);
             }
         }
-        if (enemyHp == 0 || myHp == 0) {
-            fail.move(180, 120);
-        }
         enemyLife.reduce(enemyHp);
         playerLife.reduce(myHp);
     }
 
-
+    public void stop(int shots, int hits, int misses)
+    {
+        fail.move(180, 120);
+        textArea.setText("STATISTICS:\nSHOTS: " + shots + "\nHITS: " + hits + "\nMISSES: " + misses + "\n");
+        flowPane.setVisible(true);
+    }
     public boolean isPressed(KeyCode keyCode) {
         return keys.getOrDefault(keyCode, false);
     }

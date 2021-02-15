@@ -28,7 +28,9 @@ public class ControllerPlayer extends Thread {
             try {
                 String str = in.readLine();
                 if (str.equals("stop")) {
-
+                    str = in.readLine();
+                    JSONObject jsonObject = new JSONObject(str);
+                    gamePane.stop(jsonObject.getInt("shots"), jsonObject.getInt("hits"), jsonObject.getInt("misses"));
                 }
                 JSONObject jsonObject = new JSONObject(str);
                 int tick = jsonObject.getInt("tick");

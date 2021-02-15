@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="TanksClient.jnlp">
+  <information>
+    <title>TanksClient</title>
+    <vendor>Unknown</vendor>
+    <description>TanksClient</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href="TanksClient.jar" size="435855" download="eager" />
+    <jar href="target/Tanks-1.0-SNAPSHOT.jar" size="8609875" download="eager" />
+    <jar href="target/Tanks.jar" size="147958" download="eager" />
+    <jar href="target/original-Tanks-1.0-SNAPSHOT.jar" size="147691" download="eager" />
+  </resources>
+  <jfx:javafx-desc  width="600" height="400" main-class="edu.school21.app.Main"  name="TanksClient" />
+  <update check="background"/>
+</jnlp>
