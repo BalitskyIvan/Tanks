@@ -30,10 +30,10 @@ public class GamePane extends Pane {
         listMyBullet = new ArrayList<>();
         for (int i = 0; i < 50; i++)
         {
-            MyBullet myBullet = new MyBullet(i, 10, 10);
+            MyBullet myBullet = new MyBullet(i, -10, 10);
             listMyBullet.add(myBullet);
             this.getChildren().add(listMyBullet.get(i));
-            listEnemyBullet.add(new EnemyBullet(i, 10, 10));
+            listEnemyBullet.add(new EnemyBullet(i, -10, 10));
             this.getChildren().add(listEnemyBullet.get(i));
 
         }
@@ -87,7 +87,6 @@ public class GamePane extends Pane {
         enemy.moveX(enemyX);
         ArrayList<Integer> usedEnemyBullets = new ArrayList<>();
         ArrayList<Integer> usedMyBullets = new ArrayList<>();
-
         for (int i = 0; i < enSize; i++) {
             boolean isExist = false;
             usedEnemyBullets.add(enemyBullet[0][i]);
@@ -96,6 +95,7 @@ public class GamePane extends Pane {
                 if (enemyBullet[0][i].equals(bullet.getIdentify())) {
                     isExist = true;
                     bullet.addBullet(enemyBullet[1][i], enemyBullet[2][i]);
+                    bullet.setUsed(true);
                 }
             }
             if (!isExist) {
@@ -118,6 +118,7 @@ public class GamePane extends Pane {
                 if (myBullet[0][i].equals(bullet.getIdentify())) {
                     isExist = true;
                     bullet.addBullet(myBullet[1][i], myBullet[2][i]);
+                    bullet.setUsed(true);
                 }
             }
             if (!isExist) {
@@ -139,8 +140,10 @@ public class GamePane extends Pane {
                 if (enemyBullet1.getIdentify() == bullet)
                     isUsed = true;
             }
-            if (!isUsed && enemyBullet1.isUsed())
+            if (!isUsed && enemyBullet1.isUsed()) {
                 enemyBullet1.setUsed(false);
+                enemyBullet1.addBullet(-20, -20);
+            }
         }
         for (MyBullet enemyBullet1 : listMyBullet)
         {
@@ -150,8 +153,10 @@ public class GamePane extends Pane {
                 if (enemyBullet1.getIdentify() == bullet)
                     isUsed = true;
             }
-            if (!isUsed && enemyBullet1.isUsed())
+            if (!isUsed && enemyBullet1.isUsed()) {
                 enemyBullet1.setUsed(false);
+                enemyBullet1.addBullet(-20, -20);
+            }
         }
         int myHp = 0;
         int enemyHp = 50;
