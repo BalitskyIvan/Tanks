@@ -15,7 +15,6 @@ public class GamePane extends Pane {
     private ArrayList<EnemyBullet> listEnemyBullet;
     private Border enemyLifeBorder;
     private Life enemyLife;
-
     private Player player;
     private ArrayList<MyBullet> listMyBullet;
     private Border playerLifeBorder;
@@ -82,7 +81,7 @@ public class GamePane extends Pane {
         return mv;
     }
 
-    public void update(int myX, int enemyX, int enSize, int mySize, Integer[][] enemyBullet, Integer[][] myBullet) {
+    public void update(int myX, int enemyX, int enSize, int mySize, Integer[][] enemyBullet, Integer[][] myBullet, int myHp, int enemyHp) {
         player.moveX(myX);
         enemy.moveX(enemyX);
         ArrayList<Integer> usedEnemyBullets = new ArrayList<>();
@@ -158,8 +157,6 @@ public class GamePane extends Pane {
                 enemyBullet1.addBullet(-20, -20);
             }
         }
-        int myHp = 0;
-        int enemyHp = 50;
         if (enemyHp == 0 || myHp == 0) {
             fail.move(180, 120);
         }

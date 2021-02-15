@@ -43,7 +43,7 @@ public class ControllerPlayer extends Thread {
                         response += "RIGHT";
                         break;
                     case 3: {
-                        if (tick - lastTickToShoot > 50 || lastTickToShoot == 0) {
+                        if (tick - lastTickToShoot > 20 || lastTickToShoot == 0) {
                             response += "SHOOT";
                             lastTickToShoot = tick;
                         }
@@ -79,7 +79,7 @@ public class ControllerPlayer extends Thread {
                     arrayBulletMy[1][i] = bulletM.getInt("x");
                     arrayBulletMy[2][i] = bulletM.getInt("y");
                 }
-                gamePane.update(myTank.getInt("x"), enemyTank.getInt("x"), enBulletSize, myBulletSize, arrayBulletEnemy, arrayBulletMy);
+                gamePane.update(myTank.getInt("x"), enemyTank.getInt("x"), enBulletSize, myBulletSize, arrayBulletEnemy, arrayBulletMy, myTank.getInt("hp"), enemyTank.getInt("hp"));
             } catch (IOException e) {
                 e.printStackTrace();
             }
