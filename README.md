@@ -1,4 +1,4 @@
-# ft_WorldOfTanks
+# Tanks
 
 Client-server game usign Java Spring, JavaFx. Part of the Java-modules project. (https://github.com/BalitskyIvan/Java-modules)
 
